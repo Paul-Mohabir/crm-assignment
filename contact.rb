@@ -1,11 +1,9 @@
 class Contact
-
-  attr_accessor (:first_name, :last_name, :email, :note)
-
+  attr_reader(:id)
+  attr_accessor(:first_name, :last_name, :email, :note)
 #Need to make a unique ID for each new contact added
+@@contacts = []
 @@next_id = 0
-
-
 
   # This method should initialize the contact's attributes
   def initialize (first_name, last_name, email, note)
@@ -17,11 +15,9 @@ class Contact
     @next_id += 1
   end
 
-  end
-
   # This method should call the initializer,
   # store the newly created contact, and then return it
-  def self.create
+  def self.create (first_name, last_name, email, note)
 
   end
 
