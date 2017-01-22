@@ -6,21 +6,22 @@ class Contact
   @@contacts = []
   @@next_id = 1000
 
+
   # This method should initialize the contact's attributes
   def initialize (first_name, last_name, email, note)
-    @id = @@next_id
     @first_name = first_name
     @last_name = last_name
     @email = email
     @note = note
-    @next_id += 1
+    @id = @@next_id
   end
 
   # This method should call the initializer,
   # store the newly created contact, and then return it
   def self.create (first_name, last_name, email, note)
-    new_contact = self.new(first_name, last_name, email, note)
+    new_contact = Contact.new(first_name, last_name, email, note)
     @@contacts << new_contact
+    @next_id += 1
     return new_contact
   end
 
@@ -47,43 +48,34 @@ class Contact
   # 2. the new value for that attribute
   # and then make the appropriate change to the contact
   def update(attribute, value)
-  when "first_name"
-    self.first_name = value
-  when "last_name"
-    self.last_name = value
-  when "email"
-    self.email = value
-  when "note"
-    self.note = value
-  end
-end
+    case attribute
+     when :first_name
+       self.first_name = new_value
+     when :last_name
+       self.last_name = new_value
+     when :email
+       self.email = new_value
+     when :note
+       self.note = new_value
+     end
+   end
 
   # This method should work similarly to the find method above
   # but it should allow you to search for a contact using attributes other than id
   # by specifying both the name of the attribute and the value
   # eg. searching for 'first_name', 'Betty' should return the first contact named Betty
   def self.find_by(criteria)
-    search_result = []
   @@contacts.each do |contact|
-  case criteria
-    when contact.first_name
-      search_result << contact
-    when contact.last_name
-      search_result << contact
-    when contact.email
-      search_result << contact
-    when contact.note
-      search_result << contact
-    else
-    "That value is not stored"
-  end
-  puts search_result
-  return search_result
-  end
+    return contact if attribute == :first_name && contact.first_name == value
+    return contact if attribute == :last_name && contact.last_name == value
+    return contact if attribute == :email && contact.email == value
+    return contact if attribute == :note && contact.note == value
+      end
+    end
 
   # This method should delete all of the contacts
   def self.delete_all
-    @@contacts = [nil]
+    @@contacts = []
   end
 
   def full_name
