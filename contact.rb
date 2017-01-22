@@ -4,25 +4,24 @@ class Contact
   attr_reader:id
   #Need to make a unique ID for each new contact added
   @@contacts = []
-  @@next_id = 1000
-
+  @@id = 9000
 
   # This method should initialize the contact's attributes
   def initialize (first_name, last_name, email, note)
+    @id = @@id
     @first_name = first_name
     @last_name = last_name
     @email = email
     @note = note
-    @id = @@next_id
   end
 
   # This method should call the initializer,
   # store the newly created contact, and then return it
   def self.create (first_name, last_name, email, note)
-    new_contact = Contact.new(first_name, last_name, email, note)
+    new_contact = self.new(first_name, last_name, email, note)
     @@contacts << new_contact
-    @next_id += 1
-    return new_contact
+    @@id += 1
+    new_contact
   end
 
   # This method should return all of the existing contacts
@@ -50,13 +49,13 @@ class Contact
   def update(attribute, value)
     case attribute
      when :first_name
-       self.first_name = new_value
+       self.first_name = value
      when :last_name
-       self.last_name = new_value
+       self.last_name = value
      when :email
-       self.email = new_value
+       self.email = value
      when :note
-       self.note = new_value
+       self.note = value
      end
    end
 
