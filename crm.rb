@@ -1,4 +1,4 @@
-require './contact'
+require_relative 'Contact'
 
 class CRM
 
@@ -167,5 +167,5 @@ delete_value.delete
     end
   end
 
-
 program_app = CRM.new
+end
