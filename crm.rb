@@ -82,7 +82,7 @@ Contact.create(first_name, last_name, email, note)
     puts
     break
 
-  when 1 then puts "Edit Note"
+  when 4 then puts "Edit Note"
     edit = modify_existing_contact.update(:note, value =gets.chomp)
     puts
     modify_existing_contact.display_contact
