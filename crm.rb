@@ -168,4 +168,4 @@ delete_value.delete
   end
 
 
-new_crm = CRM.new
+program_app = CRM.new
