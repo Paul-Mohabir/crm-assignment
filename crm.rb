@@ -2,8 +2,8 @@ require './contact'
 
 class CRM
 
-  def initialize(name)
-    @name = name
+  def initialize
+  main_menu
   end
 
   def main_menu
@@ -26,6 +26,7 @@ end
 
 #show menu ooptions
   def call_option(user_selected)
+    case user_selected
   when 1 then add_new_contact
   when 2 then modify_existing_contact
   when 3 then delete_contact
@@ -34,6 +35,7 @@ end
   when 6 then Exit
   end
 end
+
 
 #if option 1 seclected add a new contact
   def add_new_contact
@@ -115,12 +117,11 @@ delete_value.delete
 
   def display_all_contacts
     all_contact = Contact.all
-    all_contact each.do |stored_contact|
-    puts " "
-    puts "first_name: #{stored_contact.first_name}"
-    puts "last_name: #{stored_contact.last_name}"
-    puts "email: #{stored_contact.email}"
-    puts "id: #{stored_contact.id}"
+    all_contact .each do |list|
+    puts "first_name: #{list.first_name}"
+    puts "last_name: #{list.last_name}"
+    puts "email: #{list.email}"
+    puts "id: #{list.id}"
     puts
   end
   end
@@ -130,38 +131,39 @@ delete_value.delete
     puts "Select a Number to Search By Attribute"
     while user_selected =gets.to_i
 
-    when 1 puts "Enter First Name"
-    search_result = Contact.find_by(:first_name, value = gets.chomp.to_s)
-    puts
-    search_result.display_contact
-    puts
-    break
+  case user_selected
+  when 1 then puts "Enter First Name"
+      search_result = Contact.find_by(:first_name, value = gets.chomp.to_s)
+      puts
+      search_result.display_contact
+      puts
+      break
 
-  when 2 puts "Enter Last Name"
-  search_result = Contact.find_by(:last_name, value = gets.chomp.to_s)
-  puts
-  search_result.display_contact
-  puts
-  break
+   when 2 then puts "Enter Last Name"
+     search_result = Contact.find_by(:last_name, value = gets.chomp.to_s)
+     puts
+     search_result.display_contact
+     puts
+     break
 
-  when 3 puts "Enter Email"
-  search_result = Contact.find_by(:email, value = gets.chomp.to_s)
-  puts
-  search_result.display_contact
-  puts
-  break
+   when 3 then puts "Enter Email"
+      search_result = Contact.find_by(:email, value = gets.chomp.to_s)
+      puts
+      search_result.display_contact
+      puts
+      break
 
-when 4 puts "Enter Note"
-search_result = Contact.find_by(:note, value = gets.chomp.to_s)
-puts
-search_result.display_contact
-puts
-break
+    when 4 then puts "Enter Note"
+      search_result = Contact.find_by(:note, value = gets.chomp.to_s)
+      puts
+      search_result.display_contact
+      puts
+      break
 
-else
-  puts ""
-  puts "Enter a Number from 1 - 4"
-  end
+    else
+      puts "x------xx-----------xx-------x"
+      puts "Enter a Number from 1 - 4"
+    end
 end
 end
 end
