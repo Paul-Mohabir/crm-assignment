@@ -21,6 +21,7 @@ end
     puts '[4] Show all Contacts'
     puts '[5] Search by Attribute'
     puts '[6] Exit'
+    puts "Please Enter a Number:"
   end
 
 #show menu ooptions
@@ -51,6 +52,15 @@ note = gets.chomp
 Contact.create(first_name, last_name, email, note)
   end
 
+def attribute_list
+  puts 'Please Select an Attribute'
+    puts '[1] First Name'
+    puts '[2] Last Name'
+    puts '[3] Email'
+    puts '[4] Note'
+
+  end
+
 #When option 2 is selected modify an existing contact
   def modify_existing_contact
   display_all_contacts
@@ -58,7 +68,7 @@ Contact.create(first_name, last_name, email, note)
   id = gets.to_i
   modify_existing_contact = Contact.find(id)
 
-  attibutes
+  attribute_list
 
   case user_selected
   when 1 then puts "Edit First Name"
@@ -90,7 +100,7 @@ Contact.create(first_name, last_name, email, note)
     break
 else
   puts "Please select an attribute from 1 to 4"
-  attributes
+  attribute_list
     end
   end
 end
@@ -105,11 +115,55 @@ delete_value.delete
 
   def display_all_contacts
     all_contact = Contact.all
+    all_contact each.do |stored_contact|
+    puts " "
+    puts "first_name: #{stored_contact.first_name}"
+    puts "last_name: #{stored_contact.last_name}"
+    puts "email: #{stored_contact.email}"
+    puts "id: #{stored_contact.id}"
+    puts
+  end
   end
 
   def search_by_attribute
+    attribute_list
+    puts "Select a Number to Search By Attribute"
+    while user_selected =gets.to_i
 
+    when 1 puts "Enter First Name"
+    search_result = Contact.find_by(:first_name, value = gets.chomp.to_s)
+    puts
+    search_result.display_contact
+    puts
+    break
+
+  when 2 puts "Enter Last Name"
+  search_result = Contact.find_by(:last_name, value = gets.chomp.to_s)
+  puts
+  search_result.display_contact
+  puts
+  break
+
+  when 3 puts "Enter Email"
+  search_result = Contact.find_by(:email, value = gets.chomp.to_s)
+  puts
+  search_result.display_contact
+  puts
+  break
+
+when 4 puts "Enter Note"
+search_result = Contact.find_by(:note, value = gets.chomp.to_s)
+puts
+search_result.display_contact
+puts
+break
+
+else
+  puts ""
+  puts "Enter a Number from 1 - 4"
   end
-
-
 end
+end
+end
+
+new_crm = CRM.new
