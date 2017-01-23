@@ -1,7 +1,10 @@
+require 'pry'
+
 class Contact
 
-  attr_accessor:first_name, :last_name, :email, :note
-  attr_reader:id
+
+  attr_accessor :first_name, :last_name, :email, :note
+  attr_reader :id
   #Need to make a unique ID for each new contact added
   @@contacts = []
   @@id = 9000
@@ -47,15 +50,15 @@ class Contact
   # 2. the new value for that attribute
   # and then make the appropriate change to the contact
   def update(attribute, value)
-    case attribute
-     when :first_name
-       self.first_name = value
-     when :last_name
-       self.last_name = value
-     when :email
-       self.email = value
-     when :note
-       self.note = value
+    case attribute.to_s
+    when "first name"
+        @first_name = value
+     when  "last name"
+        @last_name = value
+     when "email"
+        @email = value
+     when "note"
+       @note = value
      end
    end
 
@@ -63,13 +66,14 @@ class Contact
   # but it should allow you to search for a contact using attributes other than id
   # by specifying both the name of the attribute and the value
   # eg. searching for 'first_name', 'Betty' should return the first contact named Betty
-  def self.find_by(criteria)
+  def self.find_by(attribute, value)
   @@contacts.each do |contact|
-    return contact if attribute == :first_name && contact.first_name == value
-    return contact if attribute == :last_name && contact.last_name == value
-    return contact if attribute == :email && contact.email == value
-    return contact if attribute == :note && contact.note == value
+    return contact if attribute.to_sym == :first_name && contact.first_name == value
+    return contact if attribute.to_sym == :last_name && contact.last_name == value
+    return contact if attribute.to_sym == :email && contact.email == value
+    return contact if attribute.to_sym == :note && contact.note == value
       end
+      return nil
     end
 
   # This method should delete all of the contacts
@@ -84,8 +88,7 @@ class Contact
   # This method should delete the contact
   # HINT: Check the Array class docs for built-in methods that might be useful here
   def delete
-    @@contacts.delete.self
-    @@contacts
+    @@contacts.delete(self)
   end
 
   # Feel free to add other methods here, if you need them.

@@ -1,4 +1,5 @@
 require_relative 'Contact'
+require "pry"
 
 class CRM
 
@@ -60,7 +61,6 @@ def attribute_list
     puts '[2] Last Name'
     puts '[3] Email'
     puts '[4] Note'
-
   end
 
 #When option 2 is selected modify an existing contact
@@ -77,28 +77,27 @@ def attribute_list
     edit = modify_existing_contact.update(:first_name, value =gets.chomp)
     puts
     modify_existing_contact.display_contact
-    puts
+
 
 
   when 2 then puts "Edit Last Name"
     edit = modify_existing_contact.update(:last_name, value =gets.chomp)
     puts
     modify_existing_contact.display_contact
-    puts
+
 
 
   when 3 then puts "Edit Email"
     edit = modify_existing_contact.update(:email, value =gets.chomp)
     puts
     modify_existing_contact.display_contact
-    puts
+
 
 
   when 4 then puts "Edit Note"
     edit = modify_existing_contact.update(:note, value =gets.chomp)
     puts
     modify_existing_contact.display_contact
-    puts
 
 else
   puts "Please select an attribute from 1 to 4"
@@ -161,11 +160,11 @@ delete_value.delete
       break
 
     else
-      puts "x------xx-----------xx-------x"
+      puts "x------xx----|----xx------x"
       puts "Enter a Number from 1 - 4"
       end
     end
   end
 
-program_app = CRM.new
-end
+  crm_app = CRM.new
+  end
