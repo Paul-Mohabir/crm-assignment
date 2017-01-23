@@ -2,8 +2,8 @@ require './contact'
 
 class CRM
 
-  def initialize
-  main_menu
+  def initialize(name)
+  @name =name
   end
 
   def main_menu
@@ -78,28 +78,28 @@ def attribute_list
     puts
     modify_existing_contact.display_contact
     puts
-    break
+
 
   when 2 then puts "Edit Last Name"
     edit = modify_existing_contact.update(:last_name, value =gets.chomp)
     puts
     modify_existing_contact.display_contact
     puts
-    break
+
 
   when 3 then puts "Edit Email"
     edit = modify_existing_contact.update(:email, value =gets.chomp)
     puts
     modify_existing_contact.display_contact
     puts
-    break
+
 
   when 4 then puts "Edit Note"
     edit = modify_existing_contact.update(:note, value =gets.chomp)
     puts
     modify_existing_contact.display_contact
     puts
-    break
+
 else
   puts "Please select an attribute from 1 to 4"
   attribute_list
@@ -163,9 +163,9 @@ delete_value.delete
     else
       puts "x------xx-----------xx-------x"
       puts "Enter a Number from 1 - 4"
+      end
     end
-end
-end
-end
+  end
+
 
 new_crm = CRM.new
